@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -euo pipefail
 
@@ -22,12 +22,12 @@ done
 
 rollup_args="--no-treeshake --no-indent"
 emcc_args="-O0"
-if [[ "$prod_build" == "true" ]]; then
+if [ $prod_build == true ]; then
   rollup_args="-p rollup-plugin-terser"
   emcc_args="-O3 --closure 1"
 fi
 
-if [[ "$build_wasm" == "true" ]]; then
+if [ $build_wasm == true ]; then
   rm -f out/janet.js
   mkdir -p out
 
@@ -56,7 +56,7 @@ if [[ "$build_wasm" == "true" ]]; then
     -s SINGLE_FILE
 fi
 
-if [[ "$build_js" == true ]]; then
+if [ $build_js == true ]; then
   rm -f out/all.js
   mkdir -p out
   (cd ui/ && ./node_modules/.bin/rollup -c $rollup_args)
@@ -73,7 +73,7 @@ if ! exists sha256sum && exists shasum; then
 fi
 
 fingerprint() {
-  if [[ "$prod_build" == "true" ]]; then
+  if [ $prod_build == true ]; then
     checksum=$(sha256sum "$1" | cut -f1 -d' ')
     printf "%s.%s" "${checksum:0:16}" "${file#*.}"
   else
@@ -89,7 +89,7 @@ staticasset() {
   printf "%s" "$dest"
 }
 
-if [[ "$build_html" == true ]]; then
+if [ $build_html == true ]; then
   rm -rf public/
   mkdir -p public/{about,help}
 
