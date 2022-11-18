@@ -11,11 +11,16 @@
 	"type": "module",
 	"main": "out/janet.js",
 	"types": "index.d.ts",
+	"files": [
+		"out/janet.js",
+		"index.d.ts"
+	],
 	"devDependencies": {
 		"@types/emscripten": "^1.39.6"
 	},
 	"scripts": {
 		"dev": "./build",
-		"build": "./build --prod"
+		"build": "./build --prod",
+		"prepublishOnly": "./build --prod --wasm"
 	}
 }
