@@ -1,10 +1,27 @@
 {
+  "name": "bauble-runtime",
+  "version": "0.0.4",
+  "description": "Bauble is a toy for composing signed distance functions in a high-level language ([Janet](https://janet-lang.org/)), compiling them to [GLSL](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language), and rendering them via WebGL.",
+  "homepage": "https://bauble.studio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ianthehenry/bauble.studio"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": "./build/wasm.js",
+  "module": "./build/wasm.js",
+  "types": "index.d.ts",
+  "files": [
+    "build/wasm.js",
+    "index.d.ts"
+  ],
   "devDependencies": {
-    "alive-server": "^1.2.9",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "postcss-cli": "^10.1.0",
-    "postcss-minify": "^1.1.0",
-    "alive-server": "^1.2.9"
+    "@types/emscripten": "^1.39.6"
+  },
+  "scripts": {
+    "dev": "./build.sh",
+    "build": "BUILD_MODE=prod ./build.sh",
+    "prepublishOnly": "BUILD_MODE=prod ./build.sh"
   }
 }
