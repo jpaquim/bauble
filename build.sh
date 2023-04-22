@@ -7,18 +7,22 @@ BUILD_DIR=$PWD/build
 mkdir -p $BUILD_DIR
 
 # build/mode
-outpath=$BUILD_DIR/mode
+mode_path=$BUILD_DIR/mode
 
 mode=${BUILD_MODE:-dev}
-echo $mode > $outpath
+echo $mode > $mode_path
+
+# build/janet
+janet_path=$BUILD_DIR/janet
+cc -rdynamic -O2 -std=c99 -Wall -Wextra -Ijanet -fvisibility=hidden -fPIC janet/janet.c ../janet/src/mainclient/shell.c -o $janet_path -lm -lpthread -lrt -ldl
 
 # build/bauble.jimage
-outpath=$BUILD_DIR/bauble.jimage
+jimage_path=$BUILD_DIR/bauble.jimage
 
-janet -c src/bauble.janet $outpath
+$janet_path -c src/bauble.janet $jimage_path
 
 # build/wasm.js
-outpath=$BUILD_DIR/wasm.js
+wasm_path=$BUILD_DIR/wasm.js
 
 extra_flags="-O0"
 if [[ $mode == "prod" ]]; then
@@ -27,7 +31,7 @@ fi
 
 emcc \
   $extra_flags \
-  -o $outpath \
+  -o $wasm_path \
   -I janet \
   janet/janet.c \
   src/driver.cpp \
