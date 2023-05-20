@@ -24921,6 +24921,7 @@ void janet_formatbv(JanetBuffer *b, const char *format, va_list args) {
                     break;
                 }
                 case 'd':
+                case 'l':
                 case 'i': {
                     int64_t n = va_arg(args, long);
                     nb = snprintf(item, MAX_ITEM, form, n);
