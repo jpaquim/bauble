@@ -1,6 +1,6 @@
 {
   "name": "bauble-runtime",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Bauble is a toy for composing signed distance functions in a high-level language ([Janet](https://janet-lang.org/)), compiling them to [GLSL](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language), and rendering them via WebGL.",
   "homepage": "https://bauble.studio",
   "repository": {
